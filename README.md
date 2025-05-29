@@ -17,5 +17,6 @@ cli typing trainer
  - [ ] cmakeの導入
  - [ ] UIレイアウトデザイン
  - [ ] rendering class設計
+ - [ ] cursesなど描画ライブラリの選定
  - [ ] input と contentsとのコンペア評価
  - [ ] contents生成class
