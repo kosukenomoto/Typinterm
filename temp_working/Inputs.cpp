@@ -4,7 +4,6 @@
 #include <memory>
 #include <ranges>
 #include <numeric>
-
 class TimeChar{
     char ch_;
     int in_milliseconds_;
