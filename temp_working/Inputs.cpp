@@ -68,4 +68,7 @@ public:
                 return acc + s + '\n';
             });
     }
+    int cur_linenum(void){
+        return cur_linenum_;
+    }
 };

@@ -15,19 +15,3 @@ public:
         return std::chrono::duration_cast<std::chrono::milliseconds>(now-last_).count();
     }
 };
-
-//int main(){
-//
-//    auto t = Timer::create(1);
-//
-//    for (int i = 0; i < 10000; ++i) {
-//
-////       std::this_thread::sleep_for(std::chrono::microseconds(1));
-//
-////        std::cout << "\r" << t->getDiffMSeconds() <<std::flush;
-////        std::cout << "\r" << t->elapsedMilliseconds() <<std::flush;
-//    }
-//    std::cout << '\n';
-//    std::cout << "total: " << t->elapsedMilliseconds() <<std::flush;
-//
-//}
