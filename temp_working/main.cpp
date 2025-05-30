@@ -54,8 +54,11 @@ int main() {
 
     while (true) {
 
-        c = getchar();
-        std::cout << c;
+//        c = getchar();
+        ssize_t n = ::read(STDIN_FILENO,&c,1);
+
+        if (n!=1){continue;}
+        std::cout << c <<std::flush;
 
         if (c == '\n') {
             std::cout << curline->elaplsedLineInput() << std::endl;

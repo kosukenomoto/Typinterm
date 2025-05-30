@@ -11,6 +11,10 @@ public:
 
         termios raw = orig_;
         cfmakeraw(&raw);
+
+        raw.c_oflag |= OPOST | ONLCR;
+        raw.c_lflag |= ISIG;
+        raw.c_iflag |= ICRNL; //ENTER key( \r change to \n )
         raw.c_cc[VMIN] = 0;
         raw.c_cc[VTIME] = 0;
 
