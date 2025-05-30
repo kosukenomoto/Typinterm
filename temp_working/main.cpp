@@ -1,28 +1,29 @@
 #include "Inputs.cpp"
 #include "Timer.cpp"
 #include "Contents.cpp"
-#include <termios.h>
+#include "terminal.hpp"
 
-void setBufferedInput(bool enable) {
-    static termios oldt;
-    static bool initialized = false;
-
-    if (!initialized) {
-        tcgetattr(STDIN_FILENO, &oldt); // 現在の端末設定を取得
-        initialized = true;
-    }
-
-    termios newt = oldt;
-    if (!enable) {
-        newt.c_lflag &= ~(ICANON | ECHO); // カノニカル・エコー無効
-    } else {
-        newt.c_lflag |= (ICANON | ECHO);
-    }
-    tcsetattr(STDIN_FILENO, TCSANOW, &newt); // 設定を即時適用
-}
+//void setBufferedInput(bool enable) {
+//    static termios oldt;
+//    static bool initialized = false;
+//
+//    if (!initialized) {
+//        tcgetattr(STDIN_FILENO, &oldt); // 現在の端末設定を取得
+//        initialized = true;
+//    }
+//
+//    termios newt = oldt;
+//    if (!enable) {
+//        newt.c_lflag &= ~(ICANON | ECHO); // カノニカル・エコー無効
+//    } else {
+//        newt.c_lflag |= (ICANON | ECHO);
+//    }
+//    tcsetattr(STDIN_FILENO, TCSANOW, &newt); // 設定を即時適用
+//}
 
 int main() {
-    setBufferedInput(false);  // バッファリング無効
+//    setBufferedInput(false);  // バッファリング無効
+    TerminalGuard term;
 
     //create test contents**********************
     std::unique_ptr conts = Contents::create();
@@ -78,7 +79,7 @@ int main() {
         curline->appendChar(c,t->elapsedMilliseconds());
 
     }
-    setBufferedInput(true);   // back termios
+//    setBufferedInput(true);   // back termios
 
     //debuging for show all typed lines
     std::cout<<"#######################\n"<<std::endl;

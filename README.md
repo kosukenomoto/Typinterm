@@ -13,6 +13,7 @@ cli typing trainer
  - 過去実績との競争
 
 ## TODO
+ - [ ] mainループの処理構造の見直し
  - [ ] classのファイル分割
  - [ ] cmakeの導入
  - [ ] UIレイアウトデザイン
