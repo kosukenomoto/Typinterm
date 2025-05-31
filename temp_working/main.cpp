@@ -1,3 +1,5 @@
+#include "input.cpp"
+#include "key_event.hpp"
 #include "Inputs.cpp"
 #include "Timer.cpp"
 #include "Contents.cpp"
@@ -33,16 +35,18 @@ int main() {
 
     //show first line contents
     std::cout << conts->contentsLine(lineCtl->cur_linenum()-1) << std::endl;
+    std::unique_ptr<InputLoop> inputloop = InputLoop::create();
 
+    //TODO evをキャッチしてステータスをupdateする構造にする
     while (true) {
 
 //        c = getchar();
-        ssize_t n = ::read(STDIN_FILENO,&c,1);
+//        ssize_t n = ::read(STDIN_FILENO,&c,1);
+        std::optional<KeyEvent> ev = inputloop->poll();
+        if (!ev.has_value()){continue;}
+        std::cout << ev.value().c <<std::flush;
 
-        if (n!=1){continue;}
-        std::cout << c <<std::flush;
-
-        if (c == '\n') {
+        if (ev.value().c == '\n') {
             std::cout << curline->elaplsedLineInput() << std::endl;
 
             //create newline(n line)
@@ -58,11 +62,11 @@ int main() {
             std::cout << conts->contentsLine(lineCtl->cur_linenum()-1) << std::endl;
             continue;
         }
-        if (c == 'q') break;
+        if (ev.value().c == 'q') break;
 
         //append cahr with elapsed ms.
         //curline->(c,t->elapsedMilliseconds());
-        curline->appendTimeChar(KeyEvent{c,std::chrono::steady_clock::now()});
+        curline->appendTimeChar(ev.value());
 
     }
 //    setBufferedInput(true);   // back termios

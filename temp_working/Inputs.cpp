@@ -17,7 +17,7 @@ public:
         std::string result;
         result.reserve(aline_.size());
         for(const KeyEvent& c : aline_){
-            result += c.ch;
+            result += c.c;
         }
         return result;
     }

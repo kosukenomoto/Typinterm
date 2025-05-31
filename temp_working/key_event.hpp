@@ -2,6 +2,7 @@
 #include <chrono>
 
 struct KeyEvent{
-    char ch;
-    std::chrono::steady_clock::time_point ts;
+   // wchar_t wc;
+   char c;
+   std::chrono::steady_clock::time_point ts;
 };
