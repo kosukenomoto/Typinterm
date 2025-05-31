@@ -14,6 +14,8 @@ cli typing trainer
 
 ## TODO
  - [ ] mainループの処理構造の見直し
+ 　　　入力のキャッチ
+ 　　　入力
  - [ ] classのファイル分割
  - [ ] cmakeの導入
  - [ ] UIレイアウトデザイン

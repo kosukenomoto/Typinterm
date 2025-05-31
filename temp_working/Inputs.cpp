@@ -4,41 +4,26 @@
 #include <memory>
 #include <ranges>
 #include <numeric>
-class TimeChar{
-    char ch_;
-    int in_milliseconds_;
-public:
-    explicit TimeChar(char x,int in_mil):ch_{x},in_milliseconds_{in_mil} {}
-    char getChar() const { return ch_; }
-    int getTime() const {return in_milliseconds_;}
-};
+#include "key_event.hpp"
 
 class Aline{
-    std::vector<TimeChar> aline_;
+    std::vector<KeyEvent> aline_;
     int aline_num_;
 public:
     explicit Aline(int n):aline_num_{n}{}
-    void appendChar(char c){
-//        aline_.push_back(new TimeChar{c,0});
-//      上記ではnewしたポインタを返すので型不一致。下記と書く。
-        aline_.emplace_back(c,0);
-    }
-    void appendChar(char c,int t){
-        aline_.emplace_back(c,t);
-    }
-    void appendTimeChar(TimeChar tm){ aline_.push_back(tm); }
+    void appendTimeChar(KeyEvent ev){ aline_.push_back(ev); }
     void deleteLastTimeChar(void){aline_.pop_back();}
     std::string showLine(void) const {
         std::string result;
         result.reserve(aline_.size());
-        for(const TimeChar& c : aline_){
-            result += c.getChar();
+        for(const KeyEvent& c : aline_){
+            result += c.ch;
         }
         return result;
     }
     //先頭と最後のTimeCharのmilsec差 //TODO １文字の場合差異が0
-    int elaplsedLineInput(){
-        return aline_.back().getTime() - aline_.front().getTime();
+    std::chrono::milliseconds elaplsedLineInput(){
+        return std::chrono::duration_cast<std::chrono::milliseconds>(aline_.back().ts - aline_.front().ts);
     }
     //TODO in_milliseconds_をキーにしてcharをゲットするメソッドを設ける
 };
