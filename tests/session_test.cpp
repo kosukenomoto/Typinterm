@@ -1,9 +1,7 @@
-#define CATCH_CONFIG_MAIN
-#include <catch2/catch_ll.hpp>
-#include "../temp_working/session.hpp"
-
-TypingSession session{};
+#include <catch2/catch_test_macros.hpp>
+#include "session.hpp"
 
 TEST_CASE("生成直後はREADY"){
-    REQUIRE(session.phase()==Phase.);
+    TypingSession session{};
+    REQUIRE(session.phase()==TypingSession::Phase::Ready);
 }
