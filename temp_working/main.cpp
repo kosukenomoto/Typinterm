@@ -1,3 +1,4 @@
+#include "session.hpp"
 #include "input.cpp"
 #include "key_event.hpp"
 #include "Inputs.cpp"
@@ -22,6 +23,9 @@ int main() {
     //input char
     char c;
 
+    //session creaste
+    TypingSession session{};
+
     //create lineCtler
     std::unique_ptr lineCtl = LineCtler::create();
 
@@ -38,36 +42,36 @@ int main() {
     std::unique_ptr<InputLoop> inputloop = InputLoop::create();
 
     //TODO evをキャッチしてステータスをupdateする構造にする
-    while (true) {
+    while (session.phase()!=TypingSession::Phase::Finished) {
 
 //        c = getchar();
 //        ssize_t n = ::read(STDIN_FILENO,&c,1);
-        std::optional<KeyEvent> ev = inputloop->poll();
-        if (!ev.has_value()){continue;}
-        std::cout << ev.value().c <<std::flush;
+        if (std::optional<KeyEvent> ev = inputloop->poll()){
+            std::cout << (*ev).c <<std::flush;
+            if ((*ev).c == '\n') {
+                std::cout << curline->elaplsedLineInput() << std::endl;
 
-        if (ev.value().c == '\n') {
-            std::cout << curline->elaplsedLineInput() << std::endl;
+                //create newline(n line)
+                curline = &(lineCtl->newline());
+                //curline = lines->newline();
+                //info↑ これはNG。NG理由は以下の通り
+                //参照ではなくコピーになってる。
+                //curlineはvectorが再生成される前のnewlineを指しているが、
+                //newlineが動くことで再生成されて参照先が古くなりリンクが壊れる。。。
+                //そして、c++では参照は一度設定すると更新できない。
 
-            //create newline(n line)
-            curline = &(lineCtl->newline());
-            //curline = lines->newline();
-            //info↑ これはNG。NG理由は以下の通り
-            //参照ではなくコピーになってる。
-            //curlineはvectorが再生成される前のnewlineを指しているが、
-            //newlineが動くことで再生成されて参照先が古くなりリンクが壊れる。。。
-            //そして、c++では参照は一度設定すると更新できない。
+                //show line contents by linenumber
+                std::cout << conts->contentsLine(lineCtl->cur_linenum()-1) << std::endl;
+                continue;
+            }
+            if ((*ev).c == 'q') break;
 
-            //show line contents by linenumber
-            std::cout << conts->contentsLine(lineCtl->cur_linenum()-1) << std::endl;
-            continue;
+            //append cahr with elapsed ms.
+            //curline->(c,t->elapsedMilliseconds());
+            curline->appendTimeChar(*ev);
+
         }
-        if (ev.value().c == 'q') break;
-
-        //append cahr with elapsed ms.
-        //curline->(c,t->elapsedMilliseconds());
-        curline->appendTimeChar(ev.value());
-
+        //if (!ev.has_value()){continue;}
     }
 //    setBufferedInput(true);   // back termios
 

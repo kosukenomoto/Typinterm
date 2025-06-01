@@ -1,0 +1,33 @@
+#pragma once
+#include "key_event.hpp"
+
+class TypingSession{
+public:
+    enum class Phase{ Ready,Running,Finished};
+    explicit TypingSession();
+
+    // input  event
+    bool update(const KeyEvent& ev); //true: to render
+
+    // time base update
+    void tick(std::chrono::steady_clock::time_point now);
+
+    // status for render
+    Phase phase()   const noexcept { return phase_; }
+    size_t cursor() const noexcept { return cursor_; }
+    size_t errors() const noexcept { return errors_; }
+    double wpm() const noexcept { return wpm_cached_; }
+
+private:
+    //status
+    Phase phase_ {Phase::Ready};
+    std::string lesson_;
+    size_t cursor_{0};
+    size_t errors_{0};
+
+    //total sum
+    std::chrono::steady_clock::time_point t0_;
+    size_t typed_chars_ {0};
+    double wpm_cached_ {0.0};
+
+};
