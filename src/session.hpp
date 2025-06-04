@@ -1,11 +1,14 @@
 #pragma once
 #include "key_event.hpp"
 #include <vector>
+#include <string>
+#include <chrono>
 
 class TypingSession{
 public:
     enum class Phase{ Ready,Running,Finished};
-    explicit TypingSession();
+    explicit TypingSession(std::string lesson = "");
+    void set_lesson(std::string lesson){ lesson_ = std::move(lesson); }
 
     // input  event
     bool update(const KeyEvent& ev); //true: to render

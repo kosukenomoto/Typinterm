@@ -1,5 +1,5 @@
 # Typinterm
-cli typing trainer
+CLI typing trainer sample
 
 ## やりたいこと
  - terminalでタイピング
@@ -12,14 +12,13 @@ cli typing trainer
  - typo率の計測
  - 過去実績との競争
 
+## Build & Test
+```
+$ cmake -B build -S .
+$ cmake --build build
+$ cd build && ctest
+```
+
 ## TODO
- - [ ] mainループの処理構造の見直し
- 　　　入力のキャッチ
- 　　　入力
- - [ ] classのファイル分割
- - [ ] cmakeの導入
  - [ ] UIレイアウトデザイン
- - [ ] rendering class設計
  - [ ] cursesなど描画ライブラリの選定
- - [ ] input と contentsとのコンペア評価
- - [ ] contents生成class
