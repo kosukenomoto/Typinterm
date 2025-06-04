@@ -5,7 +5,9 @@ set(CMAKE_CXX_STANDARD 20)
 #add lib
 add_library(core
     src/session.cpp
+    src/renderer.cpp
 )
+
 target_include_directories(core PUBLIC src)
 
 add_executable(typinterm src/main.cpp)

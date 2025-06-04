@@ -10,6 +10,7 @@ bool TypingSession::update(const KeyEvent& ev){
     }
 
     typed_keys_.push_back(ev);
+<<<<<<< HEAD
     typed_chars_++;
 
     if(cursor_ < lesson_.size()){
@@ -23,6 +24,9 @@ bool TypingSession::update(const KeyEvent& ev){
         phase_ = Phase::Finished;
     }
 
+=======
+    if(ev.c=='q') TypingSession::phase_=::TypingSession::Phase::Finished;
+>>>>>>> 5ed1c95 (renderer adds)
     return true;
 }
 

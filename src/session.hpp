@@ -19,6 +19,7 @@ public:
     // status for render
     Phase phase()   const noexcept { return phase_; }
     const std::vector<KeyEvent>& typed_key() const noexcept{return typed_keys_;}
+
     //---------------------------------------
     size_t cursor() const noexcept { return cursor_; }
     size_t errors() const noexcept { return errors_; }
