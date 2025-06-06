@@ -1,30 +1,32 @@
 #pragma once
-#include "key_event.hpp"
-#include <optional>
 #include <unistd.h>
-#include <iostream>
 
-class InputLoop{
-    int fd_;
-//    std::vector<char> buf_;
-//    std::vector<char> ring_;          // 入力リングバッファ
-//    mbstate_t st_{};                  // マルチバイト状態
-//    explicit InputLoop():fd_{STDIN_FILENO},buf_{std::vector<char>(4096)}{};
-    explicit InputLoop():fd_{STDIN_FILENO}{};
-public:
-    static std::unique_ptr<InputLoop> create(){
-//        setlocale(LC_CTYPE, "");         // 現在のロケール (UTF-8 前提)
-        return std::unique_ptr<InputLoop> {new InputLoop()};
+#include <iostream>
+#include <optional>
+
+#include "key_event.hpp"
+
+class InputLoop {
+  int fd_;
+  //    std::vector<char> buf_;
+  //    std::vector<char> ring_;          // 入力リングバッファ
+  //    mbstate_t st_{};                  // マルチバイト状態
+  //    explicit InputLoop():fd_{STDIN_FILENO},buf_{std::vector<char>(4096)}{};
+  explicit InputLoop() : fd_{STDIN_FILENO} {};
+
+ public:
+  static std::unique_ptr<InputLoop> create() {
+    //        setlocale(LC_CTYPE, "");         // 現在のロケール (UTF-8 前提)
+    return std::unique_ptr<InputLoop>{new InputLoop()};
+  }
+  std::optional<KeyEvent> poll() {
+    char c;
+    ssize_t n = ::read(fd_, &c, 1);
+    if (n == 1) {
+      return KeyEvent{c, std::chrono::steady_clock::now()};
     }
-    std::optional<KeyEvent> poll()
-    {
-        char c;
-        ssize_t n = ::read(fd_,&c,1);
-        if(n==1){
-            return KeyEvent{c, std::chrono::steady_clock::now()};
-        }
-        return std::nullopt;
-    }
+    return std::nullopt;
+  }
 };
 //        char c;
 //        ssize_t n = read(fd_, buf_.data(), buf_.size());
