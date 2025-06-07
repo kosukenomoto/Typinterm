@@ -11,12 +11,17 @@ bool TypingSession::update(const KeyEvent& ev) {
   tick(ev.ts);
   corect_update();
 
+  // TODO linecursorも繰り上げる
   typed_chars_++;
 
   if (ev.c == '\n') {
+    // TODO enter後linecursorを0クリア
     typed_lines_++;
   }
 
+  // lessonの行単位分割のコンストラクタはrenderからsessionへ移動。
+  // TODO Lessonの１行分の文字数を超えての入力はできないように制御したい。
+  // TODO linecursor<lessonsizeOfLineなときだけ入力できる
   if (cursor_ < lesson_.size()) {
     if (lesson_[cursor_] != ev.c) {
       errors_++;

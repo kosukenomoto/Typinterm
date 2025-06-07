@@ -13,7 +13,7 @@
 
 namespace {
 
-constexpr int kFps = 60;
+constexpr int kFps = 10;
 constexpr auto kFrameDuration = std::chrono::nanoseconds{1'000'000'000 / kFps};
 using clock = std::chrono::steady_clock;
 
@@ -26,7 +26,7 @@ int main() {
   TypingSession session("This test was very cool.\nand Line2\nand Line3");
 
   std::unique_ptr<InputLoop> inputloop = InputLoop::create();
-  Renderer render{};
+  Renderer render{session};
 
   while (session.phase() != TypingSession::Phase::Finished) {
     auto next_frame_time = clock::now();
@@ -34,11 +34,10 @@ int main() {
     if (std::optional<KeyEvent> ev = inputloop->poll()) {
       session.update(*ev);
     }
-    render.draw(session);
+    render.draw();
 
     next_frame_time += kFrameDuration;
     std::this_thread::sleep_until(next_frame_time);
   }
-  std::cout << "\n#######################\n" << std::endl;
   return 0;
 }
