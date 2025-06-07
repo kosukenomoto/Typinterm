@@ -8,7 +8,7 @@
 class TypingSession {
  public:
   enum class Phase { Ready, Running, Finished };
-  explicit TypingSession(std::string);
+  explicit TypingSession(std::string lesson);
   void set_lesson(std::string lesson) { lesson_ = std::move(lesson); }
 
   // input  event

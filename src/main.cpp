@@ -88,8 +88,7 @@ int main() {
   //    setBufferedInput(true);   // back termios
   //    render.showcursor();
   // debuging for show all typed lines
-  std::cout << "#######################\n" << std::endl;
-  std::cout << session.lesson_str() << std::endl;
-  std::cout << lineCtl->alllines() << std::endl;
+  std::cout << "########dddd###############\n" << std::endl;
+  std::cout << session.lesson_str() << std::flush;
   return 0;
 }
