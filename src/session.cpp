@@ -1,6 +1,12 @@
 #include "session.hpp"
 
-TypingSession::TypingSession(std::string lesson) : lesson_{std::move(lesson)} {}
+TypingSession::TypingSession(std::string lesson) : lesson_{std::move(lesson)} {
+  std::istringstream iss{lesson_};
+  std::string line;
+  while (std::getline(iss, line, '\n')) {
+    lesson_line_.push_back(line);
+  }
+}
 
 bool TypingSession::update(const KeyEvent& ev) {
   if (phase_ == Phase::Ready) {
@@ -10,6 +16,10 @@ bool TypingSession::update(const KeyEvent& ev) {
 
   typed_keys_.push_back(ev);
   typed_chars_++;
+
+  if (ev.c == '\n') {
+    typed_lines_++;
+  }
 
   if (cursor_ < lesson_.size()) {
     if (lesson_[cursor_] != ev.c) {
@@ -22,7 +32,6 @@ bool TypingSession::update(const KeyEvent& ev) {
     phase_ = Phase::Finished;
   }
 
-  if (ev.c == 'q') TypingSession::phase_ = ::TypingSession::Phase::Finished;
   return true;
 }
 

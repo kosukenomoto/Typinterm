@@ -7,12 +7,12 @@
 #include "key_event.hpp"
 
 TEST_CASE("生成直後はREADY") {
-  TypingSession session{};
+  TypingSession session{"test"};
   REQUIRE(session.phase() == TypingSession::Phase::Ready);
 }
 
 TEST_CASE("update は正常にキーを記録する") {
-  TypingSession session{};
+  TypingSession session{"test"};
   char in = 'a';
   std::chrono::steady_clock::time_point t0 = std::chrono::steady_clock::now();
   KeyEvent inkey{in, t0};
@@ -27,7 +27,7 @@ TEST_CASE("update は正常にキーを記録する") {
 }
 
 TEST_CASE("tick で wpm を計算する") {
-  TypingSession session{};
+  TypingSession session{"test"};
   auto t0 = std::chrono::steady_clock::now();
   session.update(KeyEvent{'a', t0});
   session.update(KeyEvent{'b', t0 + std::chrono::seconds(1)});

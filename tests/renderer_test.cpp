@@ -7,7 +7,7 @@
 #include "session.hpp"
 
 TEST_CASE("renderer drawはsessionのkeyeventをstring出力") {
-  TypingSession session{};
+  TypingSession session{"test"};
   Renderer render{};
   char in = 'a';
   std::chrono::steady_clock::time_point t0 = std::chrono::steady_clock::now();
