@@ -1,6 +1,7 @@
 #include "renderer.hpp"
 
 Renderer::Renderer(TypingSession &session) : session_{session} {
+  // TODO ここのコンストラクタでやってるのはsessionクラスでやるべき
   Renderer::clr();
   std::istringstream iss{session_.lesson_str()};
   std::string line;
@@ -8,7 +9,6 @@ Renderer::Renderer(TypingSession &session) : session_{session} {
   while (std::getline(iss, line, '\n')) {
     lesson_line_.push_back(line);
   }
-  // Renderer::hidecursor();
 }
 
 Renderer::~Renderer() { Renderer::showcursor(); }
@@ -43,8 +43,9 @@ void Renderer::clr() const { std::cout << "\033[2J" << std::flush; }
 std::string Renderer::show_lesson_line() const {
   return lesson_line_[session_.typed_line()] + "⏎";
 }
-
 size_t Renderer::show_lesson_line_num() const { return lesson_line_.size(); }
+
+// TODO ここのコンストラクタでやってるのはsessionクラスでやるべき
 
 std::string Renderer::show_typed_line() const {
   std::string result_;
