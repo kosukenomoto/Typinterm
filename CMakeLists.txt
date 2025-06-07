@@ -1,6 +1,8 @@
-cmake_minimum_required(VERSION 2.25)
+cmake_minimum_required(VERSION 3.20)
 project(typinterm CXX)
 set(CMAKE_CXX_STANDARD 20)
+
+find_package(Notcurses++ CONFIG REQUIRED)
 
 #add lib
 add_library(core
@@ -9,6 +11,7 @@ add_library(core
 )
 
 target_include_directories(core PUBLIC src)
+target_link_libraries(core PUBLIC notcurses++)
 
 add_executable(typinterm src/main.cpp)
 target_link_libraries(typinterm PRIVATE core)

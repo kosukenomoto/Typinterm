@@ -21,5 +21,7 @@ void Renderer::draw(TypingSession &session) const {
     result += c.c;
   }
   std::cout << "\033[" << 1 << ";" << 1 << "H" << std::flush;
+  std::cout << session.lesson_str() << std::flush;
+  std::cout << "\033[" << 2 << ";" << 1 << "H" << std::flush;
   std::cout << result << std::flush;
 }

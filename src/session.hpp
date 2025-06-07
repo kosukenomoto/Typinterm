@@ -8,7 +8,7 @@
 class TypingSession {
  public:
   enum class Phase { Ready, Running, Finished };
-  explicit TypingSession(std::string lesson = "");
+  explicit TypingSession(std::string);
   void set_lesson(std::string lesson) { lesson_ = std::move(lesson); }
 
   // input  event
@@ -22,6 +22,8 @@ class TypingSession {
   const std::vector<KeyEvent>& typed_key() const noexcept {
     return typed_keys_;
   }
+
+  const std::string& lesson_str() const noexcept { return lesson_; }
 
   //---------------------------------------
   size_t cursor() const noexcept { return cursor_; }

@@ -1,3 +1,5 @@
+#include <ncpp/NotCurses.hh>
+
 #include "Contents.cpp"
 #include "Inputs.cpp"
 #include "Timer.cpp"
@@ -10,6 +12,10 @@
 int main() {
   //    setBufferedInput(false);  // バッファリング無効
   TerminalGuard term;
+  // ncpp::NotCurses nc;
+  // auto* stdp = nc.get_stdplane();
+  // stdp->putstr(0, 0, "hello");
+  // nc.render();
 
   // create test contents**********************
   std::unique_ptr conts = Contents::create();
@@ -25,7 +31,7 @@ int main() {
   char c;
 
   // session creaste
-  TypingSession session{};
+  TypingSession session("This test was very cool.\nand Line2");
 
   // create lineCtler
   std::unique_ptr lineCtl = LineCtler::create();
@@ -83,6 +89,7 @@ int main() {
   //    render.showcursor();
   // debuging for show all typed lines
   std::cout << "#######################\n" << std::endl;
+  std::cout << session.lesson_str() << std::endl;
   std::cout << lineCtl->alllines() << std::endl;
   return 0;
 }
