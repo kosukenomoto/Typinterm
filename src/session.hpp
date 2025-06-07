@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "key_event.hpp"
+#include "key_event_pool.hpp"
 
 class TypingSession {
  public:
@@ -17,44 +18,28 @@ class TypingSession {
 
   // time base update
   void tick(std::chrono::steady_clock::time_point now);
+  // error/cusor base update
+  void corect_update();
 
   // status for render
   Phase phase() const noexcept { return phase_; }
-  const std::vector<KeyEvent>& typed_key() const noexcept {
+  const std::vector<KeyEventPool>& typed_key() const noexcept {
     return typed_keys_;
   }
 
-  const std::string show_typed_line() const noexcept {
-    std::string result_;
-    size_t retnum_{0};
-    result_.reserve(typed_key().size());
-    for (const KeyEvent& c : typed_key()) {
-      if (c.c == '\n') {
-        retnum_++;
-        continue;
-      }
-      if (retnum_ == typed_line()) {
-        result_ += c.c;
-      }
-    }
-    return result_;
-  }
-
-  const std::string& lesson_str() const noexcept {
-    return lesson_line_[typed_line()];
-  }
+  const std::string& lesson_str() const noexcept { return lesson_; }
   const size_t typed_line() const noexcept { return typed_lines_; }
 
   //---------------------------------------
   size_t cursor() const noexcept { return cursor_; }
   size_t errors() const noexcept { return errors_; }
   double wpm() const noexcept { return wpm_cached_; }
+  double correct() const noexcept { return corect_cached_; }
 
  private:
   // status
   Phase phase_{Phase::Ready};
-  std::vector<KeyEvent> typed_keys_;
-  std::vector<std::string> lesson_line_;
+  std::vector<KeyEventPool> typed_keys_;
   std::string lesson_;
   //----------------------------------------
 
@@ -64,5 +49,6 @@ class TypingSession {
   std::chrono::steady_clock::time_point t0_;
   size_t typed_chars_{0};
   size_t typed_lines_{0};
+  double corect_cached_{0.0};
   double wpm_cached_{0.0};
 };

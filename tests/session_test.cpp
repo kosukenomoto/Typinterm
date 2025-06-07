@@ -21,8 +21,8 @@ TEST_CASE("update は正常にキーを記録する") {
   SECTION("保存内容") {
     session.update(inkey);
     REQUIRE(session.typed_key().size() == 1);
-    REQUIRE(session.typed_key().back().c == inkey.c);
-    REQUIRE(session.typed_key().back().ts == inkey.ts);
+    REQUIRE(session.typed_key().back().ev.c == inkey.c);
+    REQUIRE(session.typed_key().back().ev.ts == inkey.ts);
   }
 }
 

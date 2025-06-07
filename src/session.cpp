@@ -1,12 +1,6 @@
 #include "session.hpp"
 
-TypingSession::TypingSession(std::string lesson) : lesson_{std::move(lesson)} {
-  std::istringstream iss{lesson_};
-  std::string line;
-  while (std::getline(iss, line, '\n')) {
-    lesson_line_.push_back(line);
-  }
-}
+TypingSession::TypingSession(std::string lesson) : lesson_{std::move(lesson)} {}
 
 bool TypingSession::update(const KeyEvent& ev) {
   if (phase_ == Phase::Ready) {
@@ -14,7 +8,9 @@ bool TypingSession::update(const KeyEvent& ev) {
     t0_ = ev.ts;
   }
 
-  typed_keys_.push_back(ev);
+  tick(ev.ts);
+  corect_update();
+
   typed_chars_++;
 
   if (ev.c == '\n') {
@@ -24,6 +20,9 @@ bool TypingSession::update(const KeyEvent& ev) {
   if (cursor_ < lesson_.size()) {
     if (lesson_[cursor_] != ev.c) {
       errors_++;
+      typed_keys_.push_back(KeyEventPool{ev, true});
+    } else {
+      typed_keys_.push_back(KeyEventPool{ev, false});
     }
   }
   cursor_++;
@@ -33,6 +32,12 @@ bool TypingSession::update(const KeyEvent& ev) {
   }
 
   return true;
+}
+
+void TypingSession::corect_update() {
+  corect_cached_ =
+      cursor_ == 0 ? 0.0
+                   : static_cast<double>(cursor_ - errors_) / cursor_ * 100.0;
 }
 
 void TypingSession::tick(std::chrono::steady_clock::time_point now) {
