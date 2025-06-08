@@ -27,8 +27,23 @@ class TypingSession {
     return typed_keys_;
   }
 
+  // レッスン全量
   const std::string& lesson_str() const noexcept { return lesson_; }
+  // レッスン全量vec（コンストラクタで生成される）
+  const std::vector<std::string>& lesson_lines() const noexcept {
+    return lesson_lines_;
+  }
+  // タイプ中のライン数
   const size_t typed_line() const noexcept { return typed_lines_; }
+  // タイプ中のレッスンライン
+
+  const std::string& lesson_line_str() const noexcept {
+    return lesson_lines_[typed_lines_];
+  }
+  // タイプ中のレッスンライン中の字数
+  size_t lesson_line_str_size() const noexcept {
+    return lesson_lines_[typed_lines_].size();
+  }
 
   //---------------------------------------
   size_t cursor() const noexcept { return cursor_; }
@@ -40,14 +55,18 @@ class TypingSession {
   // status
   Phase phase_{Phase::Ready};
   std::vector<KeyEventPool> typed_keys_;
+
   std::string lesson_;
+  std::vector<std::string> lesson_lines_;
   //----------------------------------------
 
   size_t cursor_{0};
+
+  size_t alltypecount_{0};
   size_t errors_{0};
   // total sum
   std::chrono::steady_clock::time_point t0_;
-  size_t typed_chars_{0};
+  size_t wpm_typed_chars_{0};
   size_t typed_lines_{0};
   double corect_cached_{0.0};
   double wpm_cached_{0.0};

@@ -1,14 +1,7 @@
 #include "renderer.hpp"
 
 Renderer::Renderer(TypingSession &session) : session_{session} {
-  // TODO ここのコンストラクタでやってるのはsessionクラスでやるべき
   Renderer::clr();
-  std::istringstream iss{session_.lesson_str()};
-  std::string line;
-
-  while (std::getline(iss, line, '\n')) {
-    lesson_line_.push_back(line);
-  }
 }
 
 Renderer::~Renderer() { Renderer::showcursor(); }
@@ -30,6 +23,8 @@ void Renderer::draw() const {
             << std::flush;
   std::cout << "\033[30;46m" << " Line: " << session_.typed_line() + 1 << " of "
             << show_lesson_line_num() << " \033[0m" << std::flush;
+  std::cout << session_.cursor() << " " << session_.lesson_line_str_size()
+            << std::flush;
   std::cout << "\033[" << 2 << ";" << 1 << "H" << std::flush;
   std::cout << show_lesson_line() << std::flush;
   std::cout << "\033[" << 3 << ";" << 1 << "H" << std::flush;
@@ -41,9 +36,12 @@ void Renderer::showcursor() const { std::cout << "\033[?25h" << std::flush; }
 void Renderer::clr() const { std::cout << "\033[2J" << std::flush; }
 
 std::string Renderer::show_lesson_line() const {
-  return lesson_line_[session_.typed_line()] + "⏎";
+  return session_.lesson_lines()[session_.typed_line()] + "⏎";
 }
-size_t Renderer::show_lesson_line_num() const { return lesson_line_.size(); }
+
+size_t Renderer::show_lesson_line_num() const {
+  return session_.lesson_lines().size();
+}
 
 // TODO ここのコンストラクタでやってるのはsessionクラスでやるべき
 

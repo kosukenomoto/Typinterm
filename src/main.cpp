@@ -34,7 +34,9 @@ int main() {
     if (std::optional<KeyEvent> ev = inputloop->poll()) {
       session.update(*ev);
     }
-    render.draw();
+    if (session.phase() != TypingSession::Phase::Finished) {
+      render.draw();
+    }
 
     next_frame_time += kFrameDuration;
     std::this_thread::sleep_until(next_frame_time);

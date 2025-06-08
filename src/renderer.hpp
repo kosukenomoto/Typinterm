@@ -22,5 +22,4 @@ class Renderer {
   std::string show_lesson_line() const;
   size_t show_lesson_line_num() const;
   TypingSession &session_;
-  std::vector<std::string> lesson_line_;
 };
