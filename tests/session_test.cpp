@@ -42,6 +42,7 @@ TEST_CASE("改行後にカーソルが正しく初期化される") {
   session.update(KeyEvent{'a', t0});
   REQUIRE(session.cursor() == 1);
   REQUIRE(session.typed_line() == 0);
+  // cmake -Vで表示
   std::cout << session.lesson_line_str().size() << std::endl;
   std::cout << session.lesson_line_str()[session.cursor()] << std::endl;
 

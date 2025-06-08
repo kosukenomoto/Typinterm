@@ -4,6 +4,7 @@
 #include "Contents.cpp"
 #include "Inputs.cpp"
 #include "Timer.cpp"
+#include "filereader.cpp"
 #include "input.cpp"
 #include "key_event.hpp"
 #include "renderer.hpp"
@@ -18,11 +19,25 @@ using clock = std::chrono::steady_clock;
 
 }  // namespace
 
-int main() {
+int main(int argc, char* argv[]) {
+  std::string filetext;
+  if (argc < 2) {
+    std::cerr << "usage: " << argv[0] << " <file>\n";
+    return 1;
+  }
+  Filereader filereader{argv[1]};
+  try {
+    filetext = filereader.read_file_skip_blanks();
+  } catch (const std::exception& e) {
+    std::cerr << e.what() << '\n';
+    return 1;
+  }
+
   TerminalGuard term;
 
   // session creaste
-  TypingSession session("This test was very cool.\nand Line2\nand Line3");
+  // TypingSession session("test\ntesttest\ntesteste3");
+  TypingSession session(filetext);
 
   std::unique_ptr<InputLoop> inputloop = InputLoop::create();
   Renderer render{session};
