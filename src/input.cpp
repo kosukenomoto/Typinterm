@@ -25,23 +25,3 @@ class InputLoop {
     return std::nullopt;
   }
 };
-//        char c;
-//        ssize_t n = read(fd_, buf_.data(), buf_.size());
-//        // 変換できるぶんだけループ
-//        const char* p = ring_.data();
-//        size_t remaining = ring_.size();
-//
-//        while(remaining){
-//            wchar_t wc;
-//            ssize_t used = mbrtowc(&wc,p,remaining,&st_);
-//            if (used==(ssize_t)-2) break;
-//            if (used==(ssize_t)-1) {
-//                std::cerr << "invalid sequence\n";
-//                used = 1;
-//                std::memset(&st_, 0, sizeof st_);
-//            }else if(used==0){
-//                used = 1;
-//            }else{
-//                if (wc == L'q') return std::nullopt;   // Enter で終了
-//                std::wcout << L"[" << wc << L"]" << std::flush;
-//            }

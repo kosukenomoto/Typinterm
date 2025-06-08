@@ -3,7 +3,6 @@
 
 #include "Contents.cpp"
 #include "Inputs.cpp"
-#include "Timer.cpp"
 #include "filereader.cpp"
 #include "input.cpp"
 #include "key_event.hpp"
@@ -36,7 +35,6 @@ int main(int argc, char* argv[]) {
   TerminalGuard term;
 
   // session creaste
-  // TypingSession session("test\ntesttest\ntesteste3");
   TypingSession session(filetext);
 
   std::unique_ptr<InputLoop> inputloop = InputLoop::create();

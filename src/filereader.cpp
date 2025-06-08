@@ -17,7 +17,8 @@ class Filereader {
     bool first = true;
 
     while (std::getline(ifs, line)) {
-      // if (is_blank_line(line)) continue;
+      // TODO To be optional pram
+      if (is_blank_line(line)) continue;
       if (!first) out << '\n';
       first = false;
       out << line;
