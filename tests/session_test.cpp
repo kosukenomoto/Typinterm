@@ -29,8 +29,43 @@ TEST_CASE("update は正常にキーを記録する") {
 TEST_CASE("tick で wpm を計算する") {
   TypingSession session{"test"};
   auto t0 = std::chrono::steady_clock::now();
-  session.update(KeyEvent{'a', t0});
-  session.update(KeyEvent{'b', t0 + std::chrono::seconds(1)});
+  session.update(KeyEvent{'t', t0});
+  session.update(KeyEvent{'e', t0 + std::chrono::seconds(1)});
   session.tick(t0 + std::chrono::minutes(1));
   REQUIRE(session.wpm() == Catch::Approx(0.4).margin(0.01));
+}
+
+TEST_CASE("改行後にカーソルが正しく初期化される") {
+  TypingSession session{"ab\nbcd"};
+  auto t0 = std::chrono::steady_clock::now();
+
+  session.update(KeyEvent{'a', t0});
+  REQUIRE(session.cursor() == 1);
+  REQUIRE(session.typed_line() == 0);
+  std::cout << session.lesson_line_str().size() << std::endl;
+  std::cout << session.lesson_line_str()[session.cursor()] << std::endl;
+
+  session.update(KeyEvent{'b', t0});
+  REQUIRE(session.cursor() == 2);
+  REQUIRE(session.typed_line() == 0);
+  std::cout << session.lesson_line_str().size() << std::endl;
+  std::cout << session.lesson_line_str()[session.cursor()] << std::endl;
+
+  session.update(KeyEvent{'\n', t0});
+  REQUIRE(session.cursor() == 0);
+  REQUIRE(session.typed_line() == 1);
+  std::cout << session.lesson_line_str().size() << std::endl;
+  std::cout << session.lesson_line_str()[session.cursor()] << std::endl;
+
+  session.update(KeyEvent{'b', t0});
+  REQUIRE(session.cursor() == 1);
+  REQUIRE(session.typed_line() == 1);
+  std::cout << session.lesson_line_str().size() << std::endl;
+  std::cout << session.lesson_line_str()[session.cursor()] << std::endl;
+
+  session.update(KeyEvent{'c', t0});
+  REQUIRE(session.cursor() == 2);
+  REQUIRE(session.typed_line() == 1);
+  std::cout << session.lesson_line_str().size() << std::endl;
+  std::cout << session.lesson_line_str()[session.cursor()] << std::endl;
 }

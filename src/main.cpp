@@ -1,5 +1,4 @@
 #include <chrono>
-#include <ncpp/NotCurses.hh>
 #include <thread>
 
 #include "Contents.cpp"
