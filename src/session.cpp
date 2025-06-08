@@ -16,17 +16,23 @@ bool TypingSession::update(const KeyEvent& ev) {
   }
 
   if (cursor_ <= lesson_line_str().size()) {
-    if (lesson_line_str()[cursor_] != ev.c) {
-      // 誤入力エラー
-      errors_++;
-      typed_keys_.push_back(KeyEventPool{ev, true});
-    } else {
+    if (lesson_line_str()[cursor_] == ev.c) {
       // 正常入力しかwpmカウントしない
       wpm_typed_chars_++;
       typed_keys_.push_back(KeyEventPool{ev, false});
+    } else {
+      if ('\n' == ev.c && cursor_ == lesson_line_str().size()) {
+        // 行末の\nは正常入力とみなす
+        wpm_typed_chars_++;
+        typed_keys_.push_back(KeyEventPool{ev, false});
+      } else {
+        // それ以外のlessonとの相違はNG
+        errors_++;
+        typed_keys_.push_back(KeyEventPool{ev, true});
+      }
     }
   } else {
-    // レッスン中の文字の長さを超えて入力されたらエラー判定
+    // レッスン中の文字の長さを超えて入力されたらNG判定
     errors_++;
     typed_keys_.push_back(KeyEventPool{ev, true});
   }
