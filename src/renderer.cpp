@@ -7,11 +7,6 @@ Renderer::Renderer(TypingSession &session) : session_{session} {
 Renderer::~Renderer() { Renderer::showcursor(); }
 
 void Renderer::draw() const {
-  // std::string result;
-  // result.reserve(session_.typed_key().size());
-  // for (const KeyEvent &c : session_.typed_key()) {
-  //   result += c.c;
-  // }
   clr();
   session_.tick(std::chrono::steady_clock::now());
   std::cout << "\033[" << 1 << ";" << 1 << "H" << std::flush;
@@ -42,8 +37,6 @@ std::string Renderer::show_lesson_line() const {
 size_t Renderer::show_lesson_line_num() const {
   return session_.lesson_lines().size();
 }
-
-// TODO ここのコンストラクタでやってるのはsessionクラスでやるべき
 
 std::string Renderer::show_typed_line() const {
   std::string result_;

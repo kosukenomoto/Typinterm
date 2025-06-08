@@ -14,13 +14,10 @@ bool TypingSession::update(const KeyEvent& ev) {
     phase_ = Phase::Running;
     t0_ = ev.ts;
   }
-  // TODO linecursorも繰り上げる
-  // lessonの行単位分割のコンストラクタはrenderからsessionへ移動。
-  // TODO Lessonの１行分の文字数を超えての入力はできないように制御したい。
-  // TODO linecursor<lessonsizeOfLineなときだけ入力できる
 
-  if (cursor_ < lesson_line_str().size()) {
+  if (cursor_ <= lesson_line_str().size()) {
     if (lesson_line_str()[cursor_] != ev.c) {
+      // 誤入力エラー
       errors_++;
       typed_keys_.push_back(KeyEventPool{ev, true});
     } else {
@@ -28,18 +25,11 @@ bool TypingSession::update(const KeyEvent& ev) {
       wpm_typed_chars_++;
       typed_keys_.push_back(KeyEventPool{ev, false});
     }
+  } else {
+    // レッスン中の文字の長さを超えて入力されたらエラー判定
+    errors_++;
+    typed_keys_.push_back(KeyEventPool{ev, true});
   }
-
-  // if (cursor_ < lesson_.size()) {
-  //   if (lesson_[cursor_] != ev.c) {
-  //     errors_++;
-  //     typed_keys_.push_back(KeyEventPool{ev, true});
-  //   } else {
-  //     // 正常入力しかwpmカウントしない
-  //     wpm_typed_chars_++;
-  //     typed_keys_.push_back(KeyEventPool{ev, false});
-  //   }
-  // }
 
   tick(ev.ts);
 
