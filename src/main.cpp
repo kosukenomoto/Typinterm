@@ -1,7 +1,6 @@
 #include <chrono>
 #include <thread>
 
-#include "Contents.cpp"
 #include "filereader.cpp"
 #include "input.hpp"
 #include "key_event.hpp"

@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 
 #add lib
 add_library(core
+    src/filereader.cpp
     src/input.cpp
     src/session.cpp
     src/renderer.cpp
