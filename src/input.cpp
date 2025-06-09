@@ -1,27 +1,21 @@
-#pragma once
+#include "input.hpp"
+
 #include <unistd.h>
 
-#include <iostream>
-#include <optional>
+#include <cctype>
 
-#include "key_event.hpp"
+InputLoop::InputLoop() : fd_{STDIN_FILENO} {};
 
-class InputLoop {
-  int fd_;
-  explicit InputLoop() : fd_{STDIN_FILENO} {};
+std::unique_ptr<InputLoop> InputLoop::create() {
+  return std::unique_ptr<InputLoop>{new InputLoop()};
+}
 
- public:
-  static std::unique_ptr<InputLoop> create() {
-    return std::unique_ptr<InputLoop>{new InputLoop()};
+std::optional<KeyEvent> InputLoop::poll() {
+  char c;
+  ssize_t n = ::read(fd_, &c, 1);
+  if (n == 1 && ((c == '\n') || (c == '\r') ||
+                 !std::iscntrl(static_cast<unsigned char>(c)))) {
+    return KeyEvent{c, std::chrono::steady_clock::now()};
   }
-  std::optional<KeyEvent> poll() {
-    char c;
-    ssize_t n = ::read(fd_, &c, 1);
-    //    if (n == 1 && (c != '\t' && c != '\b')) {
-    if (n == 1 && ((c == '\n') || (c == '\r') ||
-                   !std::iscntrl(static_cast<unsigned char>(c)))) {
-      return KeyEvent{c, std::chrono::steady_clock::now()};
-    }
-    return std::nullopt;
-  }
-};
+  return std::nullopt;
+}

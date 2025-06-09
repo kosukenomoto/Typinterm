@@ -3,7 +3,7 @@
 
 #include "Contents.cpp"
 #include "filereader.cpp"
-#include "input.cpp"
+#include "input.hpp"
 #include "key_event.hpp"
 #include "renderer.hpp"
 #include "session.hpp"
