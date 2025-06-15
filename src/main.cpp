@@ -7,9 +7,9 @@
 #include "llm_exerciseMaterial.hpp"
 #include "llm_infobody.hpp"
 #include "renderer.hpp"
+#include "savematerial.hpp"
 #include "session.hpp"
 #include "terminal.hpp"
-
 namespace {
 
 constexpr int kFps = 10;
@@ -43,26 +43,34 @@ int main(int argc, char* argv[]) {
       filetext = *text;
     }
   }
-  TerminalGuard term;
+  {
+    TerminalGuard term;
 
-  // session creaste
-  TypingSession session(filetext);
+    // session creaste
+    TypingSession session(filetext);
 
-  std::unique_ptr<InputLoop> inputloop = InputLoop::create();
-  Renderer render{session};
+    std::unique_ptr<InputLoop> inputloop = InputLoop::create();
+    Renderer render{session};
 
-  while (session.phase() != TypingSession::Phase::Finished) {
-    auto next_frame_time = clock::now();
+    while (session.phase() != TypingSession::Phase::Finished) {
+      auto next_frame_time = clock::now();
 
-    if (std::optional<KeyEvent> ev = inputloop->poll()) {
-      session.update(*ev);
+      if (std::optional<KeyEvent> ev = inputloop->poll()) {
+        session.update(*ev);
+      }
+      if (session.phase() != TypingSession::Phase::Finished) {
+        render.draw();
+      }
+
+      next_frame_time += kFrameDuration;
+      std::this_thread::sleep_until(next_frame_time);
     }
-    if (session.phase() != TypingSession::Phase::Finished) {
-      render.draw();
-    }
-
-    next_frame_time += kFrameDuration;
-    std::this_thread::sleep_until(next_frame_time);
   }
+
+  if (argc == 1) {
+    SaveMaterial smaterial{filetext};
+    smaterial.save();
+  }
+
   return 0;
 }

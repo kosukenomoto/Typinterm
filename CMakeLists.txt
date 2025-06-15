@@ -15,6 +15,7 @@ add_library(core
     src/session.cpp
     src/renderer.cpp
     src/llm_exerciseMaterial.cpp
+    src/savematerial.cpp
 )
 
 target_include_directories(core PUBLIC src)
