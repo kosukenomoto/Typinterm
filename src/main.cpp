@@ -12,7 +12,7 @@
 #include "terminal.hpp"
 namespace {
 
-constexpr int kFps = 10;
+constexpr int kFps = 60;
 constexpr auto kFrameDuration = std::chrono::nanoseconds{1'000'000'000 / kFps};
 using clock = std::chrono::steady_clock;
 
@@ -35,9 +35,17 @@ int main(int argc, char* argv[]) {
     }
   }
   if (argc == 1) {
-    Llm_infobody llmin{
-        "http://localhost:11434/api/generate", "deepseek-r1:7b",
-        R"(Please create an English passage consisting of 100 words for typing practice. Include as many letters, punctuation marks, and numbers as possible. A technical topic related to computer science is preferred.)"};
+    const std::string typing_prompt =
+        R"(Please create an English passage of exactly 100 words for typing practice on a technical topic related to computer science.
+- Include every category of printable 1-byte ASCII characters:
+  - Letters A-Z and a-z
+  - Digits 0-9
+  - A wide variety of punctuation and symbols, e.g. ! @ # $ % ^ & * ( ) _ + - = { } [ ] | : ; " ' < > , . ? / \ ` ~
+- Use only printable 1-byte ASCII characters; do not use any Unicode or multibyte characters (no accented letters, curly quotes, emojis, etc.).
+- Keep the passage exactly 100 words (no more, no less).)";
+
+    Llm_infobody llmin{"http://localhost:11434/api/generate", "deepseek-r1:7b",
+                       typing_prompt};
     ExerciseMaterial exmat{llmin};
     if (std::optional<std::string> text = exmat.material()) {
       filetext = *text;

@@ -1,0 +1,14 @@
+Algorithms are step-by-step procedures used in computer science to solve
+problems or perform tasks efficiently. They form the core of programming and
+software development, guiding computers on how to process data and execute
+operations. A fundamental algorithm is the **sequential search**, which involves
+checking each element one by one until a target value is found. Another common
+type is the **binary search**, which halves the dataset at each step for faster
+results. For instance, searching for a specific book in a library can be seen as
+a sequential search if you check every shelf until you find it. On the other
+hand, binary search might be likened to narrowing down suspects in a detective
+story by eliminating half of the possibilities repeatedly. These algorithms are
+essential for tasks like data retrieval, encryption, and compression, making
+them indispensable in computer science. Understanding how different algorithms
+work allows developers to choose the most efficient solution for their needs,
+ensuring optimal performance and scalability.

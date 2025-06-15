@@ -1,0 +1,11 @@
+Binary numbers are fundamental to computer science because they form the basis
+of how computers represent and process data. Each binary digit, or bit, can be
+either a 0 or a 1, corresponding to the off or on state of an electronic
+circuit. By using combinations of bits, computers can represent complex
+information such as text, images, and programs. Hexadecimal numbers, which use
+base 16, are often used in computing because they provide a more compact
+representation of binary data. For example, one byte of information can be
+represented with two hexadecimal digits instead of eight binary digits. This
+makes it easier for humans to read and write, while computers still process
+everything in binary form. Understanding these number systems is essential for
+anyone working with low-level programming or digital electronics.
