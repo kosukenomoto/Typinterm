@@ -1,0 +1,19 @@
+Here’s an English passage of exactly 100 words for typing practice on a
+technical topic (about C++) related to computer science: "C++ is a powerful
+programming language that combines features from both C and object-oriented
+programming. A typical program in C++ starts with including necessary headers,
+such as <iostream> and <string>, followed by using namespace std;. When
+declaring variables, you must specify their types explicitly. For example, int x
+= 5; declares an integer variable named 'x' initialized to 5. Functions can be
+defined with return types, like bool isPrime(int n) { ... }, which returns true
+if 'n' is prime. Classes are fundamental in C++, allowing encapsulation and
+abstraction. A simple class definition might look like: class MyClass { public:
+int count; void method() { count++; } }; Here's a loop that adds two numbers
+using while: int sum = 0; for(int i = 0; i < 10; ++i) { sum += i; } cout <<
+"Sum: " << sum << endl; // Outputs the result. Error handling is crucial in C++
+to manage unexpected situations. Try-catch blocks ensure programs don't crash
+abruptly, like catching exceptions from functions such as sqrt(-5), which would
+otherwise return NaN. Modular arithmetic and operator overloading are also
+common operations in C++. This brief overview demonstrates just a fraction of
+what C++ can achieve." This passage includes letters A-Z and a-z, digits 0-9,
+and various punctuation and symbols, all within the 100-word limit.

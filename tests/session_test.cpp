@@ -43,30 +43,20 @@ TEST_CASE("改行後にカーソルが正しく初期化される") {
   REQUIRE(session.cursor() == 1);
   REQUIRE(session.typed_line() == 0);
   // cmake -Vで表示
-  std::cout << session.lesson_line_str().size() << std::endl;
-  std::cout << session.lesson_line_str()[session.cursor()] << std::endl;
 
   session.update(KeyEvent{'b', t0});
   REQUIRE(session.cursor() == 2);
   REQUIRE(session.typed_line() == 0);
-  std::cout << session.lesson_line_str().size() << std::endl;
-  std::cout << session.lesson_line_str()[session.cursor()] << std::endl;
 
   session.update(KeyEvent{'\n', t0});
   REQUIRE(session.cursor() == 0);
   REQUIRE(session.typed_line() == 1);
-  std::cout << session.lesson_line_str().size() << std::endl;
-  std::cout << session.lesson_line_str()[session.cursor()] << std::endl;
 
   session.update(KeyEvent{'b', t0});
   REQUIRE(session.cursor() == 1);
   REQUIRE(session.typed_line() == 1);
-  std::cout << session.lesson_line_str().size() << std::endl;
-  std::cout << session.lesson_line_str()[session.cursor()] << std::endl;
 
   session.update(KeyEvent{'c', t0});
   REQUIRE(session.cursor() == 2);
   REQUIRE(session.typed_line() == 1);
-  std::cout << session.lesson_line_str().size() << std::endl;
-  std::cout << session.lesson_line_str()[session.cursor()] << std::endl;
 }

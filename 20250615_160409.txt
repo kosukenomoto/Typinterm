@@ -1,0 +1,11 @@
+**"Machine learning is a powerful field of computer science that focuses on
+developing algorithms capable of learning patterns from data without explicit
+programming. It has applications in various domains such as finance, healthcare,
+and entertainment. Basic machine learning models include regression for
+predicting continuous outcomes and classification for categorizing data into
+predefined groups. These models are trained using datasets containing features
+and corresponding labels. After training, the performance can be assessed using
+metrics like accuracy to measure how well the model generalizes to new, unseen
+data. Advances in computing power have enabled more complex models such as
+neural networks, which mimic biological brains' information processing
+capabilities."**

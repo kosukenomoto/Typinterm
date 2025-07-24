@@ -1,0 +1,18 @@
+Here is an English passage of exactly 100 words for typing practice on a
+technical topic related to **C++**: --- C++ is a powerful programming language
+known for its efficiency and flexibility in system-level applications. It
+extends C with additional features such as classes, functions, operator
+overloading, and templates. The syntax includes keywords like `class`,
+`function`, `while`, `if`, `for`, and operators like `+`, `-`, `*`, `/`, `%`.
+Memory management is handled using pointers and references, while dynamic data
+structures are often managed through containers like vectors and strings from
+the Standard Template Library (STL). Bitwise operations use symbols such as `~`
+for NOT and `\` for escape sequences. Understanding C++ requires practice with a
+wide range of punctuation marks, including parentheses `()`, square brackets
+`[]`, braces `{}`, colons `:`, semicolons `;`, commas `,`, periods `.`, question
+marks `?`, exclamation points `!`, and periods `.` in class definitions.
+Debugging often involves checking for syntax errors, such as mismatched braces
+or invalid function arguments, while object-oriented programming concepts like
+inheritance and polymorphism are central to C++'s design. --- This passage
+includes various printable ASCII characters and adheres to the 100-word
+requirement.

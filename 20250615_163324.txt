@@ -1,0 +1,43 @@
+#include <iostream> using namespace std; int main(){ // Declare variables char a
+= 'A'; int b = 10; bool c = true; // Perform operations a += 5; b *= 2; c =
+false; // Output results cout << "a=" << a << endl; cout << "b=" << b << endl;
+cout << "c=" << c << endl; return 0; } // Example of string manipulation string
+s = "Hello, world!"; s[2] = 'x'; cout << s << endl; // Demonstration of control
+structures if (b % a == 0){ cout << "Divisible!\n"; }else{ cout << "Not
+divisible!\n"; } // Use of loops for(int i=0; i<5; i++){ cout << "Loop
+iteration: " << i << endl; } // Example of function usage int add(int x, int y){
+return x + y; } // Return value demonstration int main(){ if (add(3, 4) > 6) {
+cout << "Result is greater than 6!\n"; }else{ cout << "Result is not greater
+than 6.\n"; } return 0; } // Use of conditional statements int main(){ int x =
+-10; if (x < 0){ cout << "Negative number!\n"; }else if (x == 0){ cout <<
+"Zero!\n"; }else{ cout << "Positive number!\n"; } return 0; } // Example of
+switch-case statement int main(){ int x = 3; switch(x){ case 1: cout << "One\n";
+break; case 2: cout << "Two\n"; break; default: cout << "Default value.\n"; }
+return 0; } // Demonstration of arrays int arr[] = {1, 2, 3, 4, 5}; cout <<
+"Array elements:\n"; for(int i=0; i<5; i++){ cout << arr[i] << endl; } // Use of
+pointers int main(){ int *ptr = &x; cout << "Pointer points to x: " << *ptr <<
+endl; delete ptr; return 0; } // Example of dynamic memory allocation int
+main(){ int* numbers = new int[5]; for(int i=0; i<5; i++){ numbers[i] = i + 1; }
+cout << "Dynamic array elements:\n"; for(int i=0; i<5; i++){ cout << numbers[i]
+<< endl; } delete[] numbers; return 0; } // Use of functions with pointers int
+main(){ char str[] = "Hello, world!"; char* end = strlen(str); cout << "String
+length: " << *end << endl; return 0; } // Demonstration of file handling void
+main(){ FILE *file = fopen("test.txt", "w"); if (file == NULL){ printf("Error
+opening file!\n"); exit(EXIT_FAILURE); }else{ fprintf(file, "Content
+written.\n"); fclose(file); } return 0; } // Example of error checking int
+main(){ if (fopen("test.txt", "r") == NULL){ printf("File not found!\n");
+exit(EXIT_FAILURE); }else{ FILE* file = fopen("test.txt", "r"); // ... read
+contents } return 0; } // Use of macros #define MY Macros(x) (x * x) int main(){
+int result = MY(5); cout << "Result of macro: " << result << endl; return 0; }
+// Example of operator overloading class Complex{ private: double real, imag;
+public: Complex(double r, double i){ this->real = r; this->imag = i; } Complex
+operator+(const Complex& other){ return Complex(this->real + other.real,
+this->imag + other.imag); } }; // Demonstration of object creation Complex
+c1(2.0, 3.0); Complex c2(4.0, 5.0); Complex c3 = c1 + c2; cout << "c3: " <<
+c3.real << "+" << c3.imag << "i" << endl; // Use of inheritance class Shape{
+public: virtual double area(){} virtual double perimeter(){} }; // Example of
+derived class class Rectangle: public Shape{ private: double length, width;
+public: Rectangle(double l, double w){ this->length = l; this->width = w; }
+double area(){ return this->length * this->width; } }; // Demonstration of
+inheritance usage Rectangle r(5.0, 3.0); cout << "Area of rectangle: " <<
+r.area() << endl;

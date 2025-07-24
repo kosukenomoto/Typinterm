@@ -1,0 +1,18 @@
+Here is a 100-word passage for typing practice in C++ that includes various
+printable ASCII characters: "In C++, an include guard protects against multiple
+inclusions by checking if the header has already been included. Consider the
+following code: /* This is a comment containing
+!@#$%^&*()_+-=:;\"'<>?,./\~`{}[]| */ // This line includes @ and [ ] as well.
+The string 'hello, world!' contains the characters '+' and '-'. When working
+with vectors of integers, it's important to ensure proper initialization using
+loops like for (int i = 0; i < size; ++i) { vector<int> vec = {}; }. Function
+overloading allows us to define multiple functions with the same name but
+different parameters, such as sort(vector<string>& vec, bool reverse = false).
+Using templates can simplify code by abstracting away type-specific details.
+Remember to use getline(cin, line) when reading lines from a file and endl to
+move to the next line in output streams. Operator overloading is a powerful
+feature that lets you define custom behavior for operators like + and -. /* This
+comment includes ;: ~ ` and | */ Do not forget to include necessary headers like
+<vector> and <string>. Always compile your code with -Wall to catch potential
+errors. Debugging can be tedious, but it's essential for ensuring correctness.
+Remember to test edge cases and use const where possible for efficiency."

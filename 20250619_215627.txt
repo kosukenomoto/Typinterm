@@ -1,0 +1,14 @@
+Here's an English passage for typing practice on C++: "C++ is a powerful
+programming language known for its efficiency and flexibility. It combines
+object-oriented and procedural programming paradigms, making it ideal for
+system-level applications. With features like templates, operator overloading,
+and exception handling, C++ provides developers with robust tools to create
+high-performance software. For instance, using `std::string` allows efficient
+string manipulation, while `std::vector` offers dynamic array capabilities.
+Operators such as `+`, `-`, `*`, `/`, and `%` are fundamental in performing
+arithmetic operations on various data types. Control structures like `if`,
+`for`, and `while` enable conditional and loop-based execution of code. By
+mastering C++, developers can build applications ranging from simple scripts to
+complex embedded systems, leveraging its extensive library support." This
+passage is approximately 100 words long, uses only printable ASCII characters,
+and includes a variety of punctuation marks as required.
